@@ -18,23 +18,28 @@ export global AppConfig {
 // ? Размеры
     //* Chat list
     // Main block
-    out property <length> max_chat_list_width: 500px;
-    out property <length> min_chat_list_height: 700px;
-    out property <length> min_chat_list_width: 50px;
+    in-out property <length> max_chat_list_width: 500px;
+    in-out property <length> min_chat_list_height: 600px;
+    in-out property <length> min_chat_list_width: 50px;
+    in-out property <length> min_chat_list_collapsed_width: 60px;
+    in-out property <length> max_chat_list_collapsed_width: 60px;
+    in-out property <length> min_chat_list_not_collapsed_width: 200px;
+    in-out property <length> max_chat_list_not_collapsed_width: 500px;
+    in-out property <length> preferred_chat_list_width: 300px;
     
     // Header
-    out property <length> chat_list_header_height: 60px;
-    out property <length> chat_list_header_preferred_width: 200px;
+    in-out property <length> chat_list_header_height: 50px;
+    in-out property <length> chat_list_header_preferred_width: 200px;
 
     // Search
-    out property <length> chat_list_header_search_height: 45px;
-    out property <length> chat_list_header_search_border_radius: 30px;
-    out property <length> chat_list_header_search_text_input_x: 25px;
-    out property <length> chat_list_header_search_image_width: 25px;
-    out property <length> chat_list_header_search_image_height: 25px;
-    out property <length> chat_list_header_search_padding_horizontal: 7.5px;
-    out property <length> chat_list_header_search_padding_vertical: 7.5px;
-    out property <length> chat_list_header_search_font_size: 14px; // Text - size
+    in-out property <length> chat_list_header_search_height: 35px;
+    in-out property <length> chat_list_header_search_border_radius: 30px;
+    in-out property <length> chat_list_header_search_text_input_x: 25px;
+    in-out property <length> chat_list_header_search_image_width: 20px;
+    in-out property <length> chat_list_header_search_image_height: 20px;
+    in-out property <length> chat_list_header_search_padding_horizontal: 12.5px;
+    in-out property <length> chat_list_header_search_font_size: 12px; // Text - size
+    in-out property <length> chat_list_header_search_height_difference: 42.5px;
+    in-out property <length> chat_list_header_search_image_width_difference: 40px;
     
-
 }

@@ -2,18 +2,18 @@ import { AppConfig } from "../../config/app-config.slint";
 import { ChatHeader } from "chat-header.slint";
 
 export component ChatList {
-    in property <length> window_height: 700px;
+    in property <length> window_height;
     in property <bool> collapsed: false;
     
 
     min-height: AppConfig.min_chat_list_height;
-    min-width: root.collapsed ? 60px : 200px;
-    max-width: root.collapsed ? 60px : 500px;
+    min-width: root.collapsed ? AppConfig.min_chat_list_collapsed_width : AppConfig.min_chat_list_not_collapsed_width;
+    max-width: root.collapsed ? AppConfig.max_chat_list_collapsed_width : AppConfig.max_chat_list_not_collapsed_width;
 
     VerticalLayout {
         ChatHeader {
-            min-width: root.collapsed ? 60px : 200px;
-            max-width: root.collapsed ? 60px : 500px;
+            min-width: root.collapsed ? AppConfig.min_chat_list_collapsed_width : AppConfig.min_chat_list_not_collapsed_width;
+            max-width: root.collapsed ? AppConfig.max_chat_list_collapsed_width : AppConfig.max_chat_list_not_collapsed_width;
             collapsed: root.collapsed;
             search-clicked => {
                 // todo обработка нажатия лупы в свёрнутом режиме
@@ -22,7 +22,7 @@ export component ChatList {
 
         Rectangle {
             background: AppConfig.surface_card;
-            height: window_height - AppConfig.chat_list_header_height;
+            vertical-stretch: 1;
             // todo здесь будут остальные элементы списка чатов
         }
     }

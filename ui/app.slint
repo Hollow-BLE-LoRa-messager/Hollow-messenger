@@ -2,8 +2,8 @@ import { ChatList } from "components/chat-list/chat-list.slint";
 import { AppConfig } from "config/app-config.slint";
 
 export component AppWindow inherits Window {
-    property <length> chat_list_width: 300px;
-    property <bool> chat_list_collapsed: chat_list_width < 200px;
+    property <length> chat_list_width: AppConfig.preferred_chat_list_width;
+    property <bool> chat_list_collapsed: chat_list_width < AppConfig.min_chat_list_not_collapsed_width;
 
     HorizontalLayout {
         spacing: 0px;
@@ -11,21 +11,22 @@ export component AppWindow inherits Window {
         ChatList {
             width: root.chat_list_width;
             collapsed: root.chat_list_collapsed;
+            window_height: root.height;
         }
 
-        handle := Rectangle {
+        Rectangle {
             width: 3px;
             background: AppConfig.divider;
 
             TouchArea {
                 moved => {
                     chat_list_width = max(
-                        60px,
-                        min(500px, chat_list_width + self.mouse-x - self.pressed-x)
+                        AppConfig.min_chat_list_collapsed_width,
+                        min(AppConfig.max_chat_list_width, chat_list_width + self.mouse-x - self.pressed-x)
                     );
 
-                    if chat_list_width <= 200px {
-                        chat_list_width = 60px;
+                    if chat_list_width <= AppConfig.min_chat_list_not_collapsed_width {
+                        chat_list_width = AppConfig.min_chat_list_collapsed_width;
                     }
                 }
             }
