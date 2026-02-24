@@ -1,0 +1,11 @@
+import { ChatKind } from "../enums/chat-kind.slint";
+
+export struct ChatItem {
+    id: int,
+    name: string,
+    threads: bool,
+    threads-count: int,
+    last-message: string,
+    avatar-color: color,
+    kind: ChatKind,
+}   

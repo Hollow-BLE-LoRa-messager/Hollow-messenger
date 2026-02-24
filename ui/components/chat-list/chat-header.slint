@@ -1,0 +1,81 @@
+import { AppConfig } from "../../config/app-config.slint";
+
+export component Search inherits Rectangle {
+    in property <bool> collapsed: false;
+    callback search_clicked();
+    callback text-changed(string);
+
+    in-out property <length> text_input_width: root.width - 60px;
+    property <string> search_text: "";
+
+    if collapsed: TouchArea {
+        width: 60px;
+        height: parent.height;
+        clicked => { root.search_clicked(); }
+
+        Image {
+            height: AppConfig.chat_list_header_search_image_height;
+            width: AppConfig.chat_list_header_search_image_width;
+            vertical-alignment: center;
+            source: @image-url("../icons/search.svg");
+        }
+    }
+
+    if !collapsed: HorizontalLayout {
+        width: parent.width;
+        Rectangle {
+            width: text_input_width;
+            clip: true;
+            TextInput {
+                x: AppConfig.chat_list_header_search_text_input_x;
+                width: text_input_width;
+                color: AppConfig.text_primary;
+                vertical-alignment: center;
+                font-size: AppConfig.chat_list_header_search_font_size;
+                text <=> root.search_text;
+
+                edited => {
+                    root.text-changed(self.text);
+                }
+            }
+
+            if root.search_text == "": Text {
+                x: AppConfig.chat_list_header_search_text_input_x;
+                font-size: AppConfig.chat_list_header_search_font_size;
+                width: text_input_width;
+                text: "Поиск...";
+                color: AppConfig.text_secondary;
+            }
+        }
+        Rectangle {
+            Image {
+                x: parent.width - 45px;
+                height: AppConfig.chat_list_header_search_image_height;
+                width: AppConfig.chat_list_header_search_image_width;
+                source: @image-url("../icons/search.svg");
+            }
+        }
+    }
+}
+
+export component ChatHeader inherits Rectangle {
+    in property <bool> collapsed: false;
+    in property <length> parent_width;
+    height: AppConfig.chat_list_header_height;
+    background: AppConfig.background;
+    callback search-clicked();
+    
+
+    HorizontalLayout {
+        padding-left: AppConfig.chat_list_header_search_padding_horizontal;
+        padding-right: AppConfig.chat_list_header_search_padding_horizontal;
+        padding-top: AppConfig.chat_list_header_search_padding_vertical;
+        Search {
+            height: AppConfig.chat_list_header_search_height;
+            border-radius: AppConfig.chat_list_header_search_border_radius;
+            background: AppConfig.surface_card;
+            collapsed: root.collapsed;
+            search-clicked => { root.search-clicked(); }
+        }
+    }
+}

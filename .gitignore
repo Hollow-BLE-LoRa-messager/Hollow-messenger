@@ -1,0 +1,5 @@
+.env
+/target
+/build
+.vscode
+Cargo.lock

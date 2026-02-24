@@ -1,0 +1,40 @@
+export global AppConfig {
+// ? Background colors
+    out property <color> background: #0D1F15; //* Задний фон.
+    out property <color> surface_card: #1A3225; //* Карточки сообщений, панели.
+    out property <color> surface_elevated: #243D2E; //* Приподнятые элементы, input-поля.
+    out property <color> primary_accent: #4A8C5C; //* CTA-кнопки, активные элементы.
+    out property <color> secondary_accent: #7CA88A; //* Иконки, подсказки, второстепенные действия.
+
+// ? Text colors
+    out property <color> text_primary: #E8F0E4; //* Основной текст
+    out property <color> text_secondary: #8FA896; //*	Метки времени, имена, плейсхолдеры
+    out property <color> active: #6FD98A; //* Статус онлайн, успех доставки.
+    out property <color> Warning:#C99B40; //* LoRa-сигнал, предупреждения.
+    out property <color> error: #B54A3A; //* Ошибка шифрования, разрыв соединения.
+    out property <color> ble_indicator: #4A7FA8; //* BLE-статус (намеренно синий — контраст к зелёному).
+    out property <color> divider: #2A3E33; //* Разделители, обводки.
+
+// ? Размеры
+    //* Chat list
+    // Main block
+    out property <length> max_chat_list_width: 500px;
+    out property <length> min_chat_list_height: 700px;
+    out property <length> min_chat_list_width: 50px;
+    
+    // Header
+    out property <length> chat_list_header_height: 60px;
+    out property <length> chat_list_header_preferred_width: 200px;
+
+    // Search
+    out property <length> chat_list_header_search_height: 45px;
+    out property <length> chat_list_header_search_border_radius: 30px;
+    out property <length> chat_list_header_search_text_input_x: 25px;
+    out property <length> chat_list_header_search_image_width: 25px;
+    out property <length> chat_list_header_search_image_height: 25px;
+    out property <length> chat_list_header_search_padding_horizontal: 7.5px;
+    out property <length> chat_list_header_search_padding_vertical: 7.5px;
+    out property <length> chat_list_header_search_font_size: 14px; // Text - size
+    
+
+}
