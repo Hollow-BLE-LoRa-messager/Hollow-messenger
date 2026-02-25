@@ -4,37 +4,17 @@ import { TitleBar } from "components/title-bar.slint";
 
 export component AppWindow inherits Window {
     in-out property <string> search_text: "";   
-    // in-out property <float > target-width: 800;
-    // in-out property <float > target-height: 600;
-    // in-out property <bool> is-maximized: false;
     
     property <length> chat_list_width: AppConfig.preferred_chat_list_width;
     property <bool> chat_list_collapsed: chat_list_width < AppConfig.min_chat_list_not_collapsed_width;
     
     background: AppConfig.secondary_accent;
     title: "Hollow";
-    // no-frame: true;
-    // width: target-width  * 1px;
-    // height: target-height  * 1px;
-
-    // animate width  { duration: 200ms; easing: ease-in-out; }
-    // animate height { duration: 200ms; easing: ease-in-out; }
-    
-    // callback start-drag();
-    // callback close-window();
-    // callback minimize-window();
-    // callback toggle-maximize();
+    icon: @image-url("icons/logo-minimal.svg");
     callback text-changed(string);
     callback search-clicked();
 
     VerticalLayout {
-
-        // TitleBar {
-        //     start-drag => { root.start-drag(); }
-        //     close-window => { root.close-window(); }
-        //     minimize-window => { root.minimize-window(); }
-        //     maximize-window => { root.toggle-maximize(); }
-        // }
 
         HorizontalLayout {
             spacing: 0px;
@@ -74,7 +54,7 @@ export component AppWindow inherits Window {
                 horizontal-stretch: 1;
                 background: AppConfig.background;
                 min-width: 400px;
-                // ... контент
+                // todo ... контент
             }
         }
     }
