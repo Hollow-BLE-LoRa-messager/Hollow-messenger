@@ -2,16 +2,17 @@ import { AppConfig } from "../../config/app-config.slint";
 
 export component Search inherits Rectangle {
     in-out property <length> text_input_width: root.width - 60px;
+    in-out property <string> search_text: "";
+    
     in property <bool> collapsed: false;
-    property <string> search_text: "";
 
-    callback search_clicked();
+    callback search-clicked();
     callback text-changed(string);
 
     if collapsed: TouchArea {
         width: 60px;
         height: parent.height;
-        clicked => { root.search_clicked(); }
+        clicked => { root.search-clicked(); }
 
         Image {
             height: AppConfig.chat_list_header_search_image_height;
@@ -32,6 +33,7 @@ export component Search inherits Rectangle {
                 color: AppConfig.text_primary;
                 vertical-alignment: center;
                 font-size: AppConfig.chat_list_header_search_font_size;
+                
                 text <=> root.search_text;
 
                 edited => {
@@ -59,12 +61,18 @@ export component Search inherits Rectangle {
 }
 
 export component ChatHeader inherits Rectangle {
+    in-out property <string> search_text: "";
+
     in property <bool> collapsed: false;
     in property <length> parent_width;
+    
     property <length> search_y: root.height - AppConfig.chat_list_header_search_height_difference;
+    
+    callback search-clicked();
+    callback text-changed(string);
+    
     height: AppConfig.chat_list_header_height;
     background: AppConfig.background;
-    callback search-clicked();
     
 
     HorizontalLayout {
@@ -76,7 +84,11 @@ export component ChatHeader inherits Rectangle {
             border-radius: AppConfig.chat_list_header_search_border_radius;
             background: AppConfig.surface_card;
             collapsed: root.collapsed;
+
+            search_text <=> root.search_text;
+
             search-clicked => { root.search-clicked(); }
+            text-changed(t) => { root.text-changed(t); }
         }
     }
 }

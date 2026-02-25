@@ -1,0 +1,45 @@
+import { Button } from "std-widgets.slint";
+
+export component TitleBar inherits Rectangle {
+    in-out property <bool> maximized: false;
+
+    height: 32px;
+    background: #313244;
+
+    callback start-drag();
+    callback close-window();
+    callback minimize-window();
+    callback maximize-window();
+
+    HorizontalLayout {
+        padding-top: 0px;
+        padding-bottom: 0px;
+
+        // Область перетаскивания
+        drag-area := TouchArea {
+            horizontal-stretch: 1;
+            pointer-event(e) => {
+                if (e.kind == PointerEventKind.down && e.button == PointerEventButton.left) {
+                    root.start-drag();
+                }
+            }
+        }
+
+        // Кнопки управления окном
+        Button { 
+            text: "−"; 
+            height: root.height;
+            clicked => { root.minimize-window(); }
+        }
+        Button { 
+            text: maximized ? "\u{2750}" : "\u{25A1}";
+            height: root.height;
+            clicked => { root.maximize-window(); } 
+        }
+        Button { 
+            text: "\u{2715}"; 
+            height: root.height;
+            clicked => { root.close-window(); } 
+        }
+    }
+}

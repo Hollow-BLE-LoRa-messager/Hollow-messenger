@@ -2,10 +2,14 @@ import { AppConfig } from "../../config/app-config.slint";
 import { ChatHeader } from "chat-header.slint";
 
 export component ChatList {
+    in-out property <string> search_text: "";
+
     in property <length> window_height;
     in property <bool> collapsed: false;
-    
 
+    callback text-changed(string); 
+    callback search-clicked();
+    
     min-height: AppConfig.min_chat_list_height;
     min-width: root.collapsed ? AppConfig.min_chat_list_collapsed_width : AppConfig.min_chat_list_not_collapsed_width;
     max-width: root.collapsed ? AppConfig.max_chat_list_collapsed_width : AppConfig.max_chat_list_not_collapsed_width;
@@ -15,9 +19,11 @@ export component ChatList {
             min-width: root.collapsed ? AppConfig.min_chat_list_collapsed_width : AppConfig.min_chat_list_not_collapsed_width;
             max-width: root.collapsed ? AppConfig.max_chat_list_collapsed_width : AppConfig.max_chat_list_not_collapsed_width;
             collapsed: root.collapsed;
-            search-clicked => {
-                // todo обработка нажатия лупы в свёрнутом режиме
-            }
+            
+            search_text <=> root.search_text;
+
+            search-clicked => { root.search-clicked(); }
+            text-changed(t) => { root.text-changed(t); }
         }
 
         Rectangle {

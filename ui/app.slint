@@ -1,41 +1,82 @@
 import { ChatList } from "components/chat-list/chat-list.slint";
 import { AppConfig } from "config/app-config.slint";
+import { TitleBar } from "components/title-bar.slint";
 
 export component AppWindow inherits Window {
+    in-out property <string> search_text: "";   
+    // in-out property <float > target-width: 800;
+    // in-out property <float > target-height: 600;
+    // in-out property <bool> is-maximized: false;
+    
     property <length> chat_list_width: AppConfig.preferred_chat_list_width;
     property <bool> chat_list_collapsed: chat_list_width < AppConfig.min_chat_list_not_collapsed_width;
+    
+    background: AppConfig.secondary_accent;
+    title: "Hollow";
+    // no-frame: true;
+    // width: target-width  * 1px;
+    // height: target-height  * 1px;
 
-    HorizontalLayout {
-        spacing: 0px;
+    // animate width  { duration: 200ms; easing: ease-in-out; }
+    // animate height { duration: 200ms; easing: ease-in-out; }
+    
+    // callback start-drag();
+    // callback close-window();
+    // callback minimize-window();
+    // callback toggle-maximize();
+    callback text-changed(string);
+    callback search-clicked();
 
-        ChatList {
-            width: root.chat_list_width;
-            collapsed: root.chat_list_collapsed;
-            window_height: root.height;
-        }
+    VerticalLayout {
 
-        Rectangle {
-            width: 3px;
-            background: AppConfig.divider;
+        // TitleBar {
+        //     start-drag => { root.start-drag(); }
+        //     close-window => { root.close-window(); }
+        //     minimize-window => { root.minimize-window(); }
+        //     maximize-window => { root.toggle-maximize(); }
+        // }
 
-            TouchArea {
-                moved => {
-                    chat_list_width = max(
-                        AppConfig.min_chat_list_collapsed_width,
-                        min(AppConfig.max_chat_list_width, chat_list_width + self.mouse-x - self.pressed-x)
-                    );
+        HorizontalLayout {
+            spacing: 0px;
 
-                    if chat_list_width <= AppConfig.min_chat_list_not_collapsed_width {
-                        chat_list_width = AppConfig.min_chat_list_collapsed_width;
+            ChatList {
+                width: root.chat_list_width;
+                collapsed: root.chat_list_collapsed;
+                window_height: root.height;
+
+                search_text <=> root.search_text;
+
+                text-changed(t) => { root.text-changed(t); }
+                search-clicked => {
+                    root.chat_list_width = 300px;
+                }
+            }
+
+            Rectangle {
+                width: 3px;
+                background: AppConfig.divider;
+
+                TouchArea {
+                    moved => {
+                        chat_list_width = max(
+                            AppConfig.min_chat_list_collapsed_width,
+                            min(AppConfig.max_chat_list_width, chat_list_width + self.mouse-x - self.pressed-x)
+                        );
+
+                        if chat_list_width <= AppConfig.min_chat_list_not_collapsed_width {
+                            chat_list_width = AppConfig.min_chat_list_collapsed_width;
+                        }
                     }
                 }
             }
-        }
 
-        Rectangle {
-            horizontal-stretch: 1;
-            background: AppConfig.background;
-            // ... контент
+            Rectangle {
+                horizontal-stretch: 1;
+                background: AppConfig.background;
+                min-width: 400px;
+                // ... контент
+            }
         }
     }
+    
 }
