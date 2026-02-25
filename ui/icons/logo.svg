@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_Слой_1" data-name="Слой_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 841.89 595.28">
+  <!-- Generator: Adobe Illustrator 29.8.3, SVG Export Plug-In . SVG Version: 2.1.1 Build 3)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 28.66px;
+      }
+
+      .st1 {
+        fill: #141937;
+      }
+    </style>
+  </defs>
+  <rect class="st1" x="265.44" y="141.96" width="311.02" height="311.36" rx="70.28" ry="70.28"/>
+  <g>
+    <circle class="st0" cx="420.94" cy="297.64" r="96.07"/>
+    <line class="st0" x1="311.46" y1="372.58" x2="530.43" y2="222.7"/>
+  </g>
+</svg>
